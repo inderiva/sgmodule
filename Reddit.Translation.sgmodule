@@ -1,0 +1,17 @@
+#!url=https://raw.githubusercontent.com/inderiva/sgmodule/master/Reddit.Translation.sgmodule
+#!name=Reddit 自动翻译
+#!desc=开启 Reddit App 官方翻译；适配新版 x-reddit-translations 请求头
+
+# Reddit 2026.28.x accepts the feature switch as "enabled". Force GraphQL
+# requests off QUIC so every request passes through Shadowrocket's MITM engine.
+
+[Rule]
+AND,((DOMAIN,gql.reddit.com),(PROTOCOL,UDP)),REJECT
+AND,((DOMAIN,gql-fed.reddit.com),(PROTOCOL,UDP)),REJECT
+
+[Header Rewrite]
+http-request ^https:\/\/gql(-fed)?\.reddit\.com\/ header-del x-reddit-translations
+http-request ^https:\/\/gql(-fed)?\.reddit\.com\/ header-add x-reddit-translations enabled
+
+[MITM]
+hostname = %APPEND% gql.reddit.com, gql-fed.reddit.com

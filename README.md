@@ -21,6 +21,14 @@
 
 ---
 
+### 🌎 Reddit 自动翻译
+
+- **功能**：开启 Reddit App 官方简体中文翻译
+- **适用**：Shadowrocket
+- **安装**：[链接](Reddit.Translation.sgmodule?raw=true)
+
+---
+
 ### 🌐 Aliyun DoH JSON API
 
 - **功能**：适配阿里 DoH JSON API 鉴权
