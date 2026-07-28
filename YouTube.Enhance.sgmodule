@@ -10,7 +10,7 @@ AND,((DOMAIN,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
 
 
 [URL Rewrite]
-^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad _ reject-200
+^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback\?(?:[^&#]*&)*oad(?:[=&]|$) _ reject-200
 
 
 [Script]
