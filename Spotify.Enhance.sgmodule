@@ -1,6 +1,6 @@
 #!url=https://raw.githubusercontent.com/inderiva/sgmodule/master/Spotify.Enhance.sgmodule
 #!name=Spotify (iOS 15+)
-#!desc=部分解锁 Premium：去播放广告、恢复歌手/专辑列表、取消强制随机播放；不支持超高音质
+#!desc=恢复歌手/专辑列表；播放授权和音质使用 Spotify 账号真实配置
 
 # Based on https://github.com/app2smile/rules/blob/master/module/spotify.module
 # Force only the scripted API hosts off QUIC so Shadowrocket can MITM them.
@@ -17,4 +17,5 @@ hostname = %APPEND% spclient.wg.spotify.com, *spclient.spotify.com
 
 [Script]
 spotify-json = type=http-request,pattern=^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/,requires-body=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-json.js
-spotify-proto = type=http-response,pattern=^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$,requires-body=1,binary-body-mode=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-proto.js,script-update-interval=0
+# Do not rewrite bootstrap/customize protobuf responses. The old script forged
+# Premium/high-bitrate entitlements and caused audio playback to be skipped.
